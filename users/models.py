@@ -13,14 +13,18 @@ class Profile(models.Model):
     profile_image = models.ImageField(null=True,blank=True,upload_to='profiles/',default="images/profile-pics/user-default.png")
     social_github = models.CharField(max_length=200,null=True,blank=True)
     social_linkedin = models.CharField(max_length=200, null=True, blank=True)
-    social_instagram = models.CharField(max_length=200, null=True, blank=True)
+    social_stack_over_flow = models.CharField(max_length=200, null=True, blank=True)
     social_youtube = models.CharField(max_length=200, null=True, blank=True)
-    social_tiktok = models.CharField(max_length=200, null=True, blank=True)
+    social_twitter = models.CharField(max_length=200, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True,editable=False)
+    location = models.CharField(max_length=20,null=True,blank=True)
 
     def __str__(self):
+        if not self.name and self.username :
+            return str(self.username)
         return str(self.name)
+
 
 class Skill(models.Model):
     created = models.DateTimeField(auto_now_add=True)
